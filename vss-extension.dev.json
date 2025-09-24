@@ -6,7 +6,7 @@
   "version": "1.0.0",
   "name": "Azure DevOps Blazor extension",
   "description": "Develop Azure DevOps Extension using Blazor WASM",
-  "publisher": "your-publisher-here",
+  "publisher": "clintcparker-ext",
   "demands": [ "api-version/3.0" ],
   "categories": [ "Azure Repos" ],
   "targets": [
