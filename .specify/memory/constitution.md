@@ -70,4 +70,4 @@ Amendments to this constitution require:
 
 Runtime development guidance follows the patterns established in the original implementation plan at `docs/original-plan.md`.
 
-**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE) | **Last Amended**: 2025-09-25
+**Version**: 1.0.0 | **Ratified**: 09-25-25 | **Last Amended**: 2025-09-25
