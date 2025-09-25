@@ -1,50 +1,73 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!-- Sync Impact Report
+Version change: 0.0.0 → 1.0.0
+Modified principles: Initial constitution creation
+Added sections: All sections (initial creation)
+Removed sections: None
+Templates requiring updates: ✅ All templates validated for initial version
+Follow-up TODOs: RATIFICATION_DATE needs confirmation
+-->
+
+# Azure DevOps Work Item Analytics Extension Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Hybrid Architecture First
+The extension MUST implement a dual-hosting architecture supporting both Azure DevOps extension mode (JavaScript interop) and standalone local development mode (PAT authentication). Every feature MUST be accessible in both modes through dependency injection and interface-based service abstraction. The JavaScript bridge layer MUST be maintained as a thin wrapper that delegates all business logic to the Blazor components.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Performance by Design
+All dashboard components MUST implement virtualization for datasets larger than 100 items. Bundle size MUST remain under 50MB for marketplace compliance. AOT compilation and tree shaking MUST be enabled for production builds. Lazy loading MUST be implemented for non-critical assemblies and heavy components.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Security and Authentication Abstraction
+Authentication MUST be abstracted behind IAuthenticationService interface enabling seamless switching between extension tokens and PAT authentication. All sensitive data (tokens, PATs) MUST be handled through secure channels and never logged or exposed in client-side code. Content Security Policy compliance MUST be maintained for all extension contributions.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Test-Driven Development
+Unit tests MUST be written before implementation following Red-Green-Refactor cycle. Integration tests MUST cover all Azure DevOps API interactions and authentication switching scenarios. JavaScript interop bridge MUST have comprehensive test coverage for both success and failure paths.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Observable Analytics Pipeline
+All data fetching operations MUST implement proper error handling, retry logic, and cancellation token support. Real-time refresh capabilities MUST use configurable polling intervals with automatic backoff on failures. Analytics queries MUST be optimized using OData projections and filters to minimize data transfer.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Development Standards
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### Code Organization
+- Blazor components organized by feature (Dashboard, Analytics, Widgets)
+- Services segregated into Abstractions, DevOps, and Analytics namespaces
+- JavaScript interop code isolated in dedicated Interop namespace
+- Extension wrapper maintained separately from Blazor application
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### Debugging and Diagnostics
+- Comprehensive logging service for both browser console and .NET logging
+- Development-only debug breakpoint injection through JavaScript
+- Detailed error boundaries around all component trees
+- Performance metrics collection for critical rendering paths
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Deployment Requirements
+
+### CI/CD Pipeline Standards
+- Automated build triggered on main and develop branches
+- Blazor WASM publication with AOT compilation for releases
+- Extension packaging with version incrementing
+- Marketplace deployment only from main branch with approval gates
+
+### Browser Compatibility
+- Chrome, Edge, Firefox, and Safari support required
+- Progressive enhancement for unsupported browser features
+- Graceful degradation when JavaScript is disabled
+- Responsive design for various dashboard widget sizes
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+The constitution supersedes all implementation decisions and architectural choices. All pull requests MUST demonstrate compliance with constitutional principles through:
+- Code review verification against principles
+- Automated testing validation
+- Bundle size checks for performance compliance
+- Security scan for authentication handling
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+Amendments to this constitution require:
+1. Documented rationale for change
+2. Impact analysis on existing codebase
+3. Migration plan for breaking changes
+4. Team consensus and approval
+
+Runtime development guidance follows the patterns established in the original implementation plan at `docs/original-plan.md`.
+
+**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE) | **Last Amended**: 2025-09-25
